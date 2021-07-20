@@ -1,21 +1,15 @@
-*{
-    box-sizing: border-box;
-    
-}
 
-.items{
+
+.Quiz-items{
     display: flex;
     flex-flow: column nowrap;
+    padding-top: 10%;
+    padding-bottom: 1%;
 }
-body{
-    background-image: url("../img/quiz/quizBack.jpg");
-    /* background-image: radial-gradient(
-        47.62% 46.65% at 45.15% 63.61%,
-        rgba(0, 0, 0, 0.42) 0%,
-        rgba(7, 1, 1, 0) 100%
-      ); */
 
-    
+/* body of the question page */
+.Quiz-body{
+    background-image: url("../img/quiz/quizBack.jpg");
 
     font-family: 'Roboto',sans-serif;
     display: flex;
@@ -28,6 +22,7 @@ body{
     height: 800px;
 }
 
+/* glass container of the question background  */
 .quiz-container{
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(8px);
@@ -46,6 +41,7 @@ body{
   );   
 }
 
+/* color change when answer is correct */
 .quiz-container-right{
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(8px);
@@ -64,7 +60,7 @@ body{
   );  
 }
 
-
+/* color change when answer is incorrect */
 .quiz-container-wrong{
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(8px);
@@ -85,31 +81,33 @@ body{
 
 .quiz-header{
     padding: 4rem;
+
 }
 
-h2{
-    padding: 1rem;
+/* styling of the questions */
+.question{
     text-align: center;
     margin: 0;
-}
+    padding-bottom: 10px;
 
-ul{
+}
+.Quiz-main-list{
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
+.Quiz-main-list , .Quiz-sub-list {
     font-size: 1.2rem;
     margin: 1rem 0;
 }
 
-ul li label{
-    cursor: pointer;
+/* changing the cursor when choosing the answes */
+.Quiz-main-list, .Quiz-sub-list .quiz-answer{
+    cursor: grab;
 }
 
-
-button{
-    /* background-color:#8e44ad; */
+/* styling of the submit bottom */
+#submit{
     background-color: rgb(201, 41, 41);
     border-radius: 30px;
     color: white;
@@ -117,27 +115,54 @@ button{
     cursor: pointer;
     font-size: 2rem;
     font-family: 'Roboto';
-    /* padding: 1.3rem; */
-    /* width:100%; */
     margin-left: 25%;
     margin-bottom: 30px;
     width:50%;
-
-
-
-   
 }
 
- button:hover{
+/* styling of the submit bottom  when hovering*/
+ #submit:hover{
     background-color:#ad66cc;
 }
 
-button:focus{
+/* styling of the submit bottom  when focus */
+#submit:focus{
     outline: none;
     background-color: #5e3370;
 }
 
-.QUIZ-footer{
-    padding-top: 50px;
+/* ------------------------------- styling of displaying timer ----------------------------- */
+#display-time{
+    padding-left: 10px;
+    margin:0;
+    display:flex;
+}
+
+
+#time-Left{
+    display: flex;
+    margin:0;
+    font-size: 15px;
+}
+
+.timer{
+    display: flex;
+    flex-flow: row;
+    padding-left: 42%;
+
+}
+
+
+h2{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    font-size: 40px;
+}
+
+.QuizFooter{
     width: 100%;
+    margin-top: 10px;
 }

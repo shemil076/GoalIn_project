@@ -1,177 +1,276 @@
-const  quizData = [
-    {
+// array of questions and answers fore the quiz  questions
+getRadioButton();
+// referance: udamy video tutorials
+const quizData = [{
         question: "Who won the last 'copa america'?",
-        a:"Brazil National FootBall Team ",
-        b:"France National FootBall Team",
-        c:"Argentina National FootBall Team",
-        d:"Portugal National FootBall Team",
-        correct:"c",
+        a: "Brazil National FootBall Team ",
+        b: "France National FootBall Team",
+        c: "Argentina National FootBall Team",
+        d: "Portugal National FootBall Team",
+        correct: "c",
     },
     {
         question: "Who is the best football player in 2020?",
-        a:"Lionel Messi ",
-        b:"Cristiano Ronaldo",
-        c:"Neymar da Silva",
-        d:"Paul Pogba",
-        correct:"a",
+        a: "Lionel Messi ",
+        b: "Cristiano Ronaldo",
+        c: "Neymar da Silva",
+        d: "Paul Pogba",
+        correct: "a",
     },
     {
         question: "Who is the manager of FC Barcelona?",
-        a:"Cristiano Ronaldo ",
-        b:"Ronald Koeman",
-        c:"Ronaldinho",
-        d:"Lionel Scaloni",
-        correct:"b",
+        a: "Cristiano Ronaldo ",
+        b: "Ronald Koeman",
+        c: "Ronaldinho",
+        d: "Lionel Scaloni",
+        correct: "b",
     },
     {
         question: "FIFA is stand for?",
-        a:"Federation Intercontinal Football Association",
-        b:"Federation Internationale de Football Association",
-        c:"Federation of International  Football Agency",
-        d:"Federation in International  Football Alliance",
-        correct:"b",
+        a: "Federation Intercontinal Football Association",
+        b: "Federation Internationale de Football Association",
+        c: "Federation of International  Football Agency",
+        d: "Federation in International  Football Alliance",
+        correct: "b",
     },
     {
         question: "How is the official sponsor of 2018  FIFA World Cup?",
-        a:"Adidas",
-        b:"Hyundai",
-        c:"Coca-Cola",
-        d:"Hisense",
-        correct:"d",
+        a: "Adidas",
+        b: "Hyundai",
+        c: "Coca-Cola",
+        d: "Hisense",
+        correct: "d",
     },
     {
         question: "What is the current FIFA rank  of sri lanka national football team?",
-        a:"99",
-        b:"210",
-        c:"204",
-        d:"152",
-        correct:"c",
+        a: "99",
+        b: "210",
+        c: "204",
+        d: "152",
+        correct: "c",
     },
     {
         question: "What is the position of Neymar da Silva?",
-        a:"Forward",
-        b:"Midfielder",
-        c:"Defender",
-        d:"GoalKeeper",
-        correct:"a",
+        a: "Forward",
+        b: "Midfielder",
+        c: "Defender",
+        d: "GoalKeeper",
+        correct: "a",
     },
     {
         question: "What is the country that has the second place in FIFA ranking (current)?",
-        a:"Portugal",
-        b:"Argentina",
-        c:"Brazil",
-        d:"France",
-        correct:"d",
+        a: "Portugal",
+        b: "Argentina",
+        c: "Brazil",
+        d: "France",
+        correct: "d",
     },
     {
         question: "What is the maximum capacity of the largest football stadium in the world?",
-        a:"187,000 people",
-        b:"150,000 people",
-        c:"165,000 people",
-        d:"145,000 people",
-        correct:"b",
+        a: "187,000 people",
+        b: "150,000 people",
+        c: "165,000 people",
+        d: "145,000 people",
+        correct: "b",
     },
     {
         question: "What is the metal that used to create the trophy of the FIFA world cup?",
-        a:"20 carat gold",
-        b:"14 carat gold",
-        c:"18 carat gold",
-        d:"24 carat gold",
-        correct:"c",
+        a: "20 carat gold",
+        b: "14 carat gold",
+        c: "18 carat gold",
+        d: "24 carat gold",
+        correct: "c",
     }
 
 
 ];
 
-const quiz = document.getElementById('quiz')
-const answerElements = document.querySelectorAll('.answer')
-const questionElements = document.getElementById('question')
-const a_text = document.getElementById('a_text')
-const b_text = document.getElementById('b_text')
-const c_text = document.getElementById('c_text')
-const d_text = document.getElementById('d_text')
-const submitButton = document.getElementById('submit')
+const quiz = document.getElementById('quiz');
+const answerElements = document.querySelectorAll('.answer');
+const questionElements = document.getElementById('question');
+const a_quiz = document.getElementById('a_quiz');
+const b_quiz = document.getElementById('b_quiz');
+const c_quiz = document.getElementById('c_quiz');
+const d_quiz = document.getElementById('d_quiz');
+const submitButton = document.getElementById('submit');
 
 
-let currentQuestion = 0
-let correct = 0
-let score = 0
+let currentQuestion = 0;
+let correct = 0;
+let score = 0;
+let incorrect = 0;
+let timeSecond = 0;
 
-loadQuestions();
 
+load_Quiz();
 
-function loadQuestions(){
+// loading questions
+function load_Quiz() {
+    timeSecond = 60;
+    showTime(timeSecond);
     deselectAnswers();
     document.getElementById("quiz").classList.remove("quiz-container-wrong");
     document.getElementById("quiz").classList.remove("quiz-container-right");
     document.getElementById("quiz").classList.add("quiz-container");
+    document.getElementById('a').disabled = false;
+    document.getElementById('b').disabled = false;
+    document.getElementById('c').disabled = false;
+    document.getElementById('d').disabled = false;
+
     const currentQuestionData = quizData[currentQuestion]
     questionElements.innerText = currentQuestionData.question
-    a_text.innerText = currentQuestionData.a
-    b_text.innerText = currentQuestionData.b
-    c_text.innerText = currentQuestionData.c
-    d_text.innerText = currentQuestionData.d
+    a_quiz.innerText = currentQuestionData.a
+    b_quiz.innerText = currentQuestionData.b
+    c_quiz.innerText = currentQuestionData.c
+    d_quiz.innerText = currentQuestionData.d
+
+   
 }
 
 
-function deselectAnswers(){
+// deselecting the default selector
+function deselectAnswers() {
     answerElements.forEach(answerElements => answerElements.checked = false)
 }
 
-function select(){
+// sellecting the ansers
+function select() {
     let answer
 
     answerElements.forEach(answerElements => {
-        if (answerElements.checked){
+        if (answerElements.checked) {
             answer = answerElements.id
         }
     })
     return answer
 }
 
-submitButton.addEventListener('mouseover',()=>{
-    const answer = select()
 
-    if (answer){
-        if (answer === quizData[currentQuestion].correct){
-            document.getElementById("quiz").classList.remove("quiz-container-wrong")
-            document.getElementById("quiz").classList.remove("quiz-container");
-            document.getElementById("quiz").classList.add("quiz-container-right")
-        } else{
-            document.getElementById("quiz").classList.remove("quiz-container-right")
-            document.getElementById("quiz").classList.remove("quiz-container");
-            document.getElementById("quiz").classList.add("quiz-container-wrong")
-        }
+// on radio button click
+// answerElements.addEventListener('click', function (event) {
+//     if (event.target.checked) {
+//         event.target.checked = true
+//     }
+// });
+
+function getRadioButton() {
+    const radAnswers = document.querySelectorAll('input[name=answer]');
+
+    for (let i = 0; i < radAnswers.length; i++) {
+        radAnswers[i].addEventListener('click', function (event) {
+            document.getElementById('a').disabled = true;
+            document.getElementById('b').disabled = true;
+            document.getElementById('c').disabled = true;
+            document.getElementById('d').disabled = true;
+            // disable radio buttons
+            if (event.target.id === quizData[currentQuestion].correct) {
+                document.getElementById("quiz").classList.remove("quiz-container-wrong");
+                document.getElementById("quiz").classList.remove("quiz-container");
+                document.getElementById("quiz").classList.add("quiz-container-right");
+            } else {
+                document.getElementById("quiz").classList.remove("quiz-container-right");
+                document.getElementById("quiz").classList.remove("quiz-container");
+                document.getElementById("quiz").classList.add("quiz-container-wrong");
+
+            }
+            // console.log(event.target.id);
+            // if (answer) {
+            //     if (answer === quizData[currentQuestion].correct) {
+            //         correct++
+            //         score += 2;
+
+            //     } else {
+            //         score -= 1;
+
+            //     }
+            //     if (score < 0) {
+            //         score = 0;
+            //     }
+        }, false);
     }
-})
+}
 
 
-submitButton.addEventListener('click',()=>{
+
+//  change the question when clicking the reload button, and if the number of questions are greater the index of the last question in the arry user will get the final marks
+
+submitButton.addEventListener('click', () => {
     const answer = select()
 
-    if (answer){
-        if (answer === quizData[currentQuestion].correct){
-            correct++   
-            score += 2   // chech here if you want to change the background color
-    
-        } else{
-            score -= 1
-           
-        }
+    if (answer) {
+        if (answer === quizData[currentQuestion].correct) {
+            correct++
+            score += 2;
 
+        } else if (answer != quizData[currentQuestion].correct) {
+            score -= 1;
+
+        }
+        if (score < 0) {
+            score = 0;
+        }
         currentQuestion++
 
-        if(currentQuestion < quizData.length){
-            loadQuestions()
-        }else{
-            quiz.innerHTML =`
+        if (currentQuestion < quizData.length) {
+            load_Quiz();
+        } else {
+            quiz.innerHTML = `
                 <h2> You answered correctly at ${correct}
                 /${quizData.length} questions </h2>
-                <h3>Finale Score = ${score}</h3>
+                <h3>Total Score = ${score}</h3>
 
-                <button onclick="location.reload()">Reload</button>
+                <button id="submit" onclick="location.reload()">Reload</button>
             `
         }
 
     }
 })
+
+
+
+
+
+// --------------------------------------------- timer --------------------------------
+// referance: github.com
+
+
+const countDown = setInterval(() => {
+    timeSecond--;
+    showTime(timeSecond);
+    if (timeSecond == 0 || timeSecond < 1) {
+        endCount();
+        clearInterval(countDown);
+    }
+}, 1000);
+
+// display the time to the user 
+function showTime(second) {
+    const min = Math.floor(second / 60);
+    const sec = Math.floor(second % 60);
+    const times = document.querySelector("h4");
+    times.innerHTML = `
+    ${(min < 10)? '0' : ''}${min}:${(sec < 10)? '0' : ''}${sec}
+    `;
+}
+
+// load the next question if the time limit ends 
+function endCount() {
+    score -= 1;
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+        load_Quiz();
+    } else {
+        quiz.innerHTML = `
+            <h2 class="Quiz-final-h2"> You answered correctly at ${correct}
+            /${quizData.length} questions </h2>
+            <h2>And ${incorrect} incorrectly<h2>
+            <h3 class="Quiz-final-h3">Total Score = ${score}</h3>
+
+            <button class="submit" onclick="location.reload()">Reload</button>
+        `
+    }
+}
+
+
+
+
